@@ -88,7 +88,7 @@ Cross-platform mobile development is preferred for the Driver App.
 The following Admin Portal is provided as the **design and colour-theme reference**:
 
 **Admin UI Reference:**  
-https://id-preview--29526d21-889b-410d-affc-7d0297827ba6.lovable.app/
+https://lovable.dev/preview/pi9tJeo8YAKv7C3Imprs6ry1kYWjir7r
 
 The exact implementation may differ according to the team's technology and UX decisions, but the overall visual identity must remain consistent with the provided reference.
 
