@@ -159,7 +159,7 @@ Priority: **P0** = must-have, **P1** = important, **P2** = nice-to-have.
 ### 5.4 Payroll, Wallet and Invoicing
 
 **Payroll rules**
-- **The payout rate is set per company** as a driver % / company % split (example: Driver 30% / Company 70%). It is entered when the company is added in Company Management and can be edited later in Payroll Settings.
+- **The payout rate is set per company** as a driver % / platform % split (`driver_share_pct` / `platform_share_pct`, which must sum to 100; example: Driver 30% / Platform 70%). It is entered when the company is added in Company Management and can be edited later in Payroll Settings.
 - There is no per-driver rate. Every driver on a company's trips receives that company's driver percentage.
 - When creating or accepting a trip, Admin only enters the **total trip amount**; the split is applied automatically from the company's rate.
 - The system never sets or changes rates on its own.
@@ -170,17 +170,17 @@ Priority: **P0** = must-have, **P1** = important, **P2** = nice-to-have.
 | Example: Trip amount ₹10,000 | Share | Amount |
 |---|---|---|
 | Driver | 30% | ₹3,000 |
-| Company | 70% | ₹7,000 |
+| Platform | 70% | ₹7,000 |
 | **Total** | 100% | ₹10,000 |
 
 - The driver's amount is credited to the Driver Wallet immediately on trip close, without waiting for the partner's payment.
 - Expenses are recorded and shown in the trip report but are not part of the commission split.
 
-**Trip Payroll Record (per closed trip):** Trip ID, Driver, B2B Partner, trip amount, applied rate, driver share, company share, total, payment status, payout/wallet status.
+**Trip Payroll Record (per closed trip):** Trip ID, Driver, B2B Partner, trip amount, applied rate, driver share, platform share, total, payment status, payout/wallet status.
 
 **Month-end Statement/Invoice**
 - Admin triggers generation per company for a calendar month; it includes all *Closed* trips in that month.
-- Contents: total trip amount, total driver share, total company share, trip-wise rates and monthly totals.
+- Contents: total trip amount, total driver share, total platform share, trip-wise rates and monthly totals.
 - **Two-person verification [Confirmed]:** the statement must be approved by the admin who created it and by one other admin. Both approvals are recorded (who, when) before it can be published.
 - After verification, the statement appears in the partner's portal.
 - Payment is settled outside the platform. No payment page or gateway.
@@ -193,7 +193,7 @@ Priority: **P0** = must-have, **P1** = important, **P2** = nice-to-have.
 |---|---|
 | Billing issues | Discrepancies between trip and invoice data |
 | Driver delay report | Drivers who delay trips most often |
-| Client order volume and success rate | Orders per company and on-time delivery rate |
+| Company order volume and success rate | Orders per company and on-time delivery rate |
 | Driver payout report | Per-driver payouts, updating as trips close |
 | Trip Report | Filter: live / daily / monthly |
 | Order Report | Orders with status and outcome |
@@ -205,7 +205,7 @@ Priority: **P0** = must-have, **P1** = important, **P2** = nice-to-have.
 
 | Entity | Key fields |
 |---|---|
-| Company | name, contact person, contact details, address, payout split (driver % / company %) |
+| Company | name, contact person, contact details, address, payout split (`driver_share_pct` / `platform_share_pct`; must sum to 100) |
 | Order | company, pickup, drop, date/time, notes, status, source (portal/admin) |
 | Trip | order, driver, amount, ETA, status, OTP, selfie, timestamps |
 | Driver | profile, documents, availability, active status |
@@ -213,6 +213,14 @@ Priority: **P0** = must-have, **P1** = important, **P2** = nice-to-have.
 | Wallet Transaction | driver, trip, amount, timestamp |
 | Trip Payroll Record | as defined in 5.4 |
 | Statement/Invoice | company, month, totals, status, verifier 1, verifier 2 |
+
+### 6.1 Glossary
+
+| Term | Meaning |
+|---|---|
+| Company | The B2B partner organization that books trips (referred to as "B2B Partner" or "partner" elsewhere in this document). Orders and Statements/Invoices belong to a Company. |
+| Platform | HireD, the operating business. It receives the platform share of each trip amount. |
+| Driver | The person who performs trips and receives the driver share in their Driver Wallet. |
 
 ---
 
